@@ -1,0 +1,40 @@
+/* Strikeout text with done class*/
+.done {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.438);
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  margin: auto;
+  width: 80%;
+  padding: 1px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+/* move the delete button to the right */
+
+#todo-list {
+  list-style-type: none;
+  /* center  */
+  margin: auto;
+  padding: 0;
+  width: 60%;
+  scale: 1.25;
+}
+.todo-creator {
+  margin: auto;
+  width: 60%;
+  padding: 0;
+  margin-bottom: 30px;
+}
+.listitem::after {
+  content: "";
+  height: 10px;
+  display: table;
+}
+.listitem {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
