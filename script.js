@@ -2,7 +2,6 @@
 var myButton = document.getElementById("todo-submit");
 loadTodo();
 function addTodo(todoText, myList) {
-  console.log(todoText + "hi");
   var myItem = document.createElement("li");
   var myDelete = document.createElement("button");
   var myCheck = document.createElement("input");
@@ -14,23 +13,30 @@ function addTodo(todoText, myList) {
   myCheck.setAttribute("type", "checkbox");
   myItemText.setAttribute("disabled", "true");
   myItemText.setAttribute("readonly", "true");
+  myItemText.setAttribute("id", "myItemText");
 
   myItemText.value = todoText;
+
   myCheckButtonContainer.appendChild(myCheck);
   myDiv.appendChild(myCheckButtonContainer);
   myDiv.appendChild(myItemText);
   myItem.appendChild(myDiv);
   myDiv.appendChild(myEdit);
   myDiv.appendChild(myDelete);
+  myList.appendChild(myItem);
 
+  // Styling
   myItemText.classList.add("form-control");
   myCheckButtonContainer.classList.add("btn", "btn-secondary");
   myDiv.classList.add("input-group", "listitem");
   myDelete.classList.add("delete", "btn", "btn-danger");
   myEdit.classList.add("edit", "btn", "btn-warning");
 
-  myItemText.setAttribute("id", "myItemText");
+  // Add Icons
+  myDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+  myEdit.innerHTML = '<i class="fa-solid fa-edit"></i>';
 
+  // Event listeners
   myEdit.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("edit");
@@ -41,30 +47,16 @@ function addTodo(todoText, myList) {
     console.log("save");
     saveEdit(myItemText);
   });
-  myList.appendChild(myItem);
-
-  myDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-  myEdit.innerHTML = '<i class="fa-solid fa-edit"></i>';
-  //delete item
   myDelete.addEventListener("click", function (event) {
     event.preventDefault();
     deleteItem(myItem);
   });
-  //check item
   myCheck.addEventListener("click", function (event) {
     myItem.classList.toggle("done");
     myItemText.classList.toggle("done");
   });
 }
-function createTodo(event) {
-  event.preventDefault();
-  var myInput = document.getElementById("todo-input");
-  var myList = document.getElementById("todo-list");
-  addTodo(myInput.value, myList);
-  // Reset input
-  myInput.value = "";
-  saveTodo();
-}
+c
 // State management
 // Local storage
 // Save todo list
