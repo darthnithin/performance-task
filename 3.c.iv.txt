@@ -1,0 +1,38 @@
+This procedure populates the website with the todo elements. It programically creates the elements on the page, allowing them to be re-created easily when the page is reloaded and the old, saved elements must be created.
+
+The function takes as an input: the text to be added as a To-Do item, and an HTML Unordered List that the todo item will be appended to.
+
+Next create a html list element “li”, a delete button, an checkbox, a div for everything to be inside of, a Text input element to be used to display and edit the todo items, an edit button, and a button to be placed behind the checkbox.
+
+
+
+Next we give the checkbox the type “checkbox”, give the Text Input to be used to display the to-Do Item the attributes of “disabled”, “readonly” and the id of “myItemText”. The reason for the attributes of disabled and readonly is to use the text input as a text display and for Bootstrap to render it as intended.
+
+
+
+The next thing to be done is set the value of the myItemtext (that is the text input being used to display the to-do element) to todoText—which is a parameter of the function that  is the intended text to be displayed.
+
+
+
+Append the Checkbox as a child of the “myCheckButtonContainer” (this is purely for styling reasons—we want the checkbox to be in front of a button so it is visually distinct from the todo Item). Next, append the “myCheckButtonCountainer”,  “myItemText” (the todo item), the edit button, and the delete button as a child of the div. Finally append the div itself to an item in the unordered list passed as a function parameter.
+
+
+
+Style all the items: Create a form, style the delete, edit and checkbox buttons appropriatly.
+
+
+
+Add the icons for the Delete and Edit buttons.
+
+
+
+Add an event listener to the Edit button that will call the editItem() function, passing the To-Do element as a parameter.
+
+Add an event listener to the “blur” event of the To-Do Item that calls the saveEdit() function, so that once the Item is unfocused (when someone clicks off of the item), it will save the list to Storage. This is useful after editing an item, so that the user’s edits will persist.
+
+Add an event listener to the delete button that calls the deleteItem() function.
+
+Add event listener to the checkbox to give it class “done”, which will style it stricken-out and grey. 
+
+
+
