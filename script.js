@@ -56,7 +56,15 @@ function addTodo(todoText, myList) {
     myItemText.classList.toggle("done");
   });
 }
-c
+function createTodo(event) {
+  event.preventDefault();
+  var myInput = document.getElementById("todo-input");
+  var myList = document.getElementById("todo-list");
+  addTodo(myInput.value, myList, false);
+  // Reset input
+  myInput.value = "";
+  saveTodo();
+}
 // State management
 // Local storage
 // Save todo list
