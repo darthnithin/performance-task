@@ -7,32 +7,41 @@ function addTodo(todoText, myList) {
   var myDelete = document.createElement("button");
   var myCheck = document.createElement("input");
   var myDiv = document.createElement("div");
-  var myEditable = document.createElement("input");
+  var myItemText = document.createElement("input");
   var myEdit = document.createElement("button");
   var myCheckButtonContainer = document.createElement("button");
 
   myCheck.setAttribute("type", "checkbox");
+  myItemText.setAttribute("disabled", "true");
+  myItemText.setAttribute("readonly", "true");
 
-  myEditable.value = todoText;
+  myItemText.value = todoText;
   myCheckButtonContainer.appendChild(myCheck);
   myDiv.appendChild(myCheckButtonContainer);
-  myDiv.appendChild(myEditable);
+  myDiv.appendChild(myItemText);
   myItem.appendChild(myDiv);
   myDiv.appendChild(myEdit);
   myDiv.appendChild(myDelete);
 
-  myEditable.classList.add("form-control");
+  myItemText.classList.add("form-control");
   myCheckButtonContainer.classList.add("btn", "btn-secondary");
   myDiv.classList.add("input-group", "listitem");
   myDelete.classList.add("delete", "btn", "btn-danger");
   myEdit.classList.add("edit", "btn", "btn-warning");
 
+  myItemText.setAttribute("id", "myItemText");
+
   myEdit.addEventListener("click", function (event) {
     event.preventDefault();
-    editItem(item);
+    console.log("edit");
+    editItem(myItemText);
+  });
+  myItemText.addEventListener("blur", function (event) {
+    event.preventDefault();
+    console.log("save");
+    saveEdit(myItemText);
   });
   myList.appendChild(myItem);
-  addEdit(myItem);
 
   myDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
   myEdit.innerHTML = '<i class="fa-solid fa-edit"></i>';
@@ -43,8 +52,8 @@ function addTodo(todoText, myList) {
   });
   //check item
   myCheck.addEventListener("click", function (event) {
-    event.preventDefault();
     myItem.classList.toggle("done");
+    myItemText.classList.toggle("done");
   });
 }
 function createTodo(event) {
@@ -60,11 +69,10 @@ function createTodo(event) {
 // Local storage
 // Save todo list
 function saveTodo() {
-  var myList = document.getElementById("todo-list");
-  var myListItems = myList.children;
+  var myListItems = document.querySelectorAll("#myItemText");
   var myListArray = [];
   for (var i = 0; i < myListItems.length; i++) {
-    myListArray.push(myListItems[i].innerText);
+    myListArray.push(myListItems[i].value);
   }
   localStorage.setItem("todoList", JSON.stringify(myListArray));
 }
@@ -113,11 +121,17 @@ function deleteItem(item) {
   saveTodo();
 }
 // add edit button
-function addEdit(item) {}
+
 // edit item
 function editItem(item) {
-  var myInput = document.getElementById("todo-input");
-  myInput.value = item.innerText;
-
+  item.removeAttribute("disabled");
+  item.removeAttribute("readonly");
+  item.focus();
+  item.select();
+  saveTodo();
+}
+function saveEdit(item) {
+  item.setAttribute("disabled", "true");
+  item.setAttribute("readonly", "true");
   saveTodo();
 }
