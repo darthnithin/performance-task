@@ -1,7 +1,7 @@
 //get element
 var myButton = document.getElementById("todo-submit");
 loadTodo();
-function addTodo(todoText, myList) {
+function addTodo(todoText, myList, checked) {
   var myItem = document.createElement("li");
   var myDelete = document.createElement("button");
   var myCheck = document.createElement("input");
@@ -36,6 +36,13 @@ function addTodo(todoText, myList) {
   myDelete.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
   myEdit.innerHTML = '<i class="fa-solid fa-edit"></i>';
 
+  // Add an Aldready Checked Item
+  if (checked) {
+    myCheck.checked = true;
+    myCheck.classList.add("done");
+    myItemText.classList.add("done");
+  }
+
   // Event listeners
   myEdit.addEventListener("click", function (event) {
     event.preventDefault();
@@ -54,6 +61,7 @@ function addTodo(todoText, myList) {
   myCheck.addEventListener("click", function (event) {
     myItem.classList.toggle("done");
     myItemText.classList.toggle("done");
+    saveTodo();
   });
 }
 function createTodo(event) {
@@ -72,7 +80,11 @@ function saveTodo() {
   var myListItems = document.querySelectorAll("#myItemText");
   var myListArray = [];
   for (var i = 0; i < myListItems.length; i++) {
-    myListArray.push(myListItems[i].value);
+    if (myListItems[i].classList.contains("done")) {
+      myListArray.push([myListItems[i].value, true]);
+    } else {
+      myListArray.push([myListItems[i].value, false]);
+    }
   }
   localStorage.setItem("todoList", JSON.stringify(myListArray));
 }
@@ -83,7 +95,13 @@ function loadTodo() {
   if (myListArray != null) {
     for (var i = 0; i < myListArray.length; i++) {
       console.log(myListArray[i]);
-      addTodo(myListArray[i], myList);
+      // Load todo list
+      // If item is checked call the function with the checked parameter set to true
+      if (myListArray[i][1]) {
+        addTodo(myListArray[i][0], myList, true);
+      } else {
+        addTodo(myListArray[i][0], myList, false);
+      }
     }
   }
 }
