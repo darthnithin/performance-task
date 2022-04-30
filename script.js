@@ -39,7 +39,7 @@ function addTodo(todoText, myList, checked) {
   // Add an Aldready Checked Item
   if (checked) {
     myCheck.checked = true;
-    myCheck.classList.add("done");
+    myItem.classList.add("done");
     myItemText.classList.add("done");
   }
 
