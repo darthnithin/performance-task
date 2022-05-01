@@ -100,9 +100,9 @@ function loadTodo() {
       // Load todo list
       // If item is checked call the function with the checked parameter set to true
       if (myListArray[i][1]) {
-        addTodo(myListArray[i][0], myList, true); 
+        addTodo(myListArray[i][0], myList, true);
       } else {
-        addTodo(myListArray[i][0], myList, false); 
+        addTodo(myListArray[i][0], myList, false);
       }
     }
   }
