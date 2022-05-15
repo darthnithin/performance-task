@@ -1,3 +1,5 @@
+/* script.js */
+
 //get element
 var myButton = document.getElementById("todo-submit");
 loadTodo();
