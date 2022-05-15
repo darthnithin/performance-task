@@ -84,3 +84,9 @@ body {
   font-family: "Libre Baskerville", serif !important;
   font-size: 2em !important;
 }
+.magasinregular {
+  font-family: "Magasin Reg";
+  font-display: swap;
+  font-style: normal;
+  font-weight: normal;
+}
